@@ -1,6 +1,10 @@
 # SexDifferences_HRT
  Hormone Replacement Therapy (HRT) Affects Regional Sex-Related Tau Positron Emission Tomography (PET) Differences 
  
+ The primary code for this analysis is stored in SexDiffsAnalysis_v6. All other R files contain supporting functions. 
+ 
+ dabestr, data, flat_violin, main, plot, and plot_helpers have been mildly adapted from the R package dabestr in order to generate custom plots.
+ 
  Authors: Julie K. Wisch PhD, Elizabeth A. Grant PhD, Tammie L. Benzinger MD, PhD, John C. Morris MD, Beau M. Ances MD, PhD
  
  ABSTRACT 
