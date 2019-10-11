@@ -5,7 +5,7 @@
  
  dabestr, data, flat_violin, main, plot, and plot_helpers have been mildly adapted from the R package dabestr in order to generate custom plots.
  
- Authors: Julie K. Wisch PhD, Elizabeth A. Grant PhD, Tammie L. Benzinger MD, PhD, John C. Morris MD, Beau M. Ances MD, PhD
+ Authors: Julie K. Wisch PhD, Brian A. Gordon, PhD, Shaney Flores, BS, Aylin Dincer, BA, Elizabeth A. Grant PhD, Tammie L. Benzinger MD, PhD, John C. Morris MD, Beau M. Ances MD, PhD
  
  ABSTRACT 
 Importance: Female sex is a major risk factor for late-onset Alzheimer Disease (AD), and sex hormones have been implicated as a possible protective factor. Neuroimaging studies that evaluated the effects of sex hormones on brain integrity have primarily emphasized neurodegenerative measures, not amyloid and tau accumulation.
