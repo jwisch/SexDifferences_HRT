@@ -165,14 +165,4 @@ PACCplot<-function(REGION, XLAB){
   return(p)}
 
 
-#Comparing rates of change
-GetRofC<-function(index, DF){
-  outcome <- names(DF[index])
-  f <- as.formula( paste(paste(outcome, "Age", sep = "~"), "ID", sep = "|"))
-  fits <- lmList(f, DF)
-  fits<-data.frame(cbind(names(fits), coef(fits)))
-  colnames(fits)<-c("ID", "Intercept", "Slope")
-  
-  lm_coefs<-merge(fits, DF[,c("ID", "GENDER", "EDUC", "apoe4")], by = "ID", all = FALSE)
-  lm_coefs<-lm_coefs[!duplicated(lm_coefs),]
-  return(lm_coefs)}
+
