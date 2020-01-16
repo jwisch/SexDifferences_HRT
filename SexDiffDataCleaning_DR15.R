@@ -1,12 +1,13 @@
 #Reading in PET Scans
+FILEPATH<-"C:/Users/julie.wisch/Documents/ADRC/DR15/"
 
-df.pib<-read.csv("C:/Users/julie.wisch/Documents/ADRC/DR15/HASD_ACS_DR15_PIB.csv")
-df.tau<-read.csv("C:/Users/julie.wisch/Documents/ADRC/DR15/HASD_ACS_DR15_TAU.csv")
-# df.pib<-read.csv("C:/Users/julie.wisch/Documents/ADRC/HASD_ACS_DR14_PIB.csv")
-# df.tau<-read.csv("C:/Users/julie.wisch/Documents/SexDiffs/HASD_ACS_DR14_TAU.csv")
+df.pib<-read.csv(paste(FILEPATH, "HASD_ACS_DR15_PIB.csv", sep = ""))
+df.tau<-read.csv(paste(FILEPATH, "HASD_ACS_DR15_TAU.csv", sep = ""))
+df.demog<-read.csv(paste(FILEPATH, "DR_demographics_20190122.csv", sep = ""))
+df.clin<-read.csv(paste(FILEPATH, "DR_clinical_20190122.csv", sep = ""))
 
-# df.pib<-read.csv("W:/ances/julie/Data/ADRC/Aggregated/HASD_ACS_DR14_PIB.csv")
-# df.tau<-read.csv("W:/ances/julie/Data/ADRC/Aggregated/HASD_ACS_DR14_TAU.csv")
+
+
 df.tau<-df.tau[!(df.tau$PUP_QC_Status == "Failed" | df.tau$PUP_QC_Status == "Quarantined"),]
 df.tau<-df.tau[,c(5:6, 806:831, 867:879, 915:924, 938:941, 955:973, 1009:1021, 1057:1064, 25)]
 df.tau$PET_Date<-as.Date(df.tau$PET_Date, format = "%m/%d/%Y")
@@ -29,12 +30,8 @@ df.tau<-df.tau[with(df.tau, order(ID, PET_Date)),]
 df.pib<-df.pib[with(df.pib, order(ID, PET_Date)),]
 
 
-df.demog<-read.csv("C:/Users/julie.wisch/Documents/ADRC/DR15/DR_demographics_20190122.csv")
-#df.demog<-read.csv("W:/ances/julie/Data/ADRC/Aggregated/DR_demographics_20190122.csv")
 df.demog$BIRTH<-format(as.Date(df.demog$BIRTH, "%d-%b-%y"), "19%y-%m-%d")
 
-df.clin<-read.csv("C:/Users/julie.wisch/Documents/ADRC/DR15/DR_clinical_20190122.csv")
-#df.clin<-read.csv("W:/ances/julie/Data/ADRC/Aggregated/DR_clinical_20190122.csv")
 df.clin$TESTDATE<-as.Date(df.clin$TESTDATE, format = "%Y-%m-%d")
 
 df.clin<-df.clin[,2:4]
