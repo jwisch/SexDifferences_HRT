@@ -1,9 +1,16 @@
 
 #Loading in functions used as well as cleaned dataframe for analysis
-source("C:/Users/julie.wisch/Documents/Stark/CommonFuncs.r")
-source("C:/Users/julie.wisch/Documents/SexDiffs/SexDiffFuncs.r")
-source("C:/Users/julie.wisch/Documents/SexDiffs/SexDiffDataCleaning_DR15_try2.r") 
+FILEPATH_OTHERCODE<-"C:/Users/julie.wisch/Documents/Transition/DraftedMS_SexDiffs/Code/"
+source(paste(FILEPATH_OTHERCODE, "CommonFuncs.r", sep = ""))
+source(paste(FILEPATH_OTHERCODE, "SexDiffFuncs.r", sep = ""))
+source(paste(FILEPATH_OTHERCODE, "SexDiffDataCleaning_DR15_try2.r", sep = ""))
+
 ######################################################################################
+#Loading in files not loaded in the datacleaning step
+FILEPATH_DATA<-"C:/Users/julie.wisch/Documents/Transition/DraftedMS_SexDiffs/Data/"
+Meds<-read.csv(paste(FILEPATH_DATA, "DR_mednames_190118.csv", sep = ""))
+df.psych<-read.csv(paste(FILEPATH_DATA, "ances_psych_092618.csv", sep = ""))
+df.clin<-read.csv(paste(FILEPATH_DATA, "ances_clinical_011819.csv", sep = ""))
 
 ########################################################################################
 #Loading libraries in
@@ -53,7 +60,9 @@ result<-data.frame("Region" = character(), "Amyloid" = numeric(), "Sex" = numeri
                    "APOE_Cortmean" = numeric(), "Interaction_Cortmean" = numeric(),
                    stringsAsFactors = FALSE)
 k<-0
-
+#Looping through and testing for a difference in tau burden for a given level of amyloid for every region individually
+#Using the function coeftest from the sandwich package to get heteroskedacity consistent estimators
+#Lots of these models violate the heteroskedacity argument. this is one way around that
 for(i in c(15:48)){
   k<-k+1
   result[k, 1]<-substring(names(df.log[i]), 15)
@@ -116,7 +125,7 @@ results %>%
 
 ########################################################################################
 #Now adding in HT use history
-Meds<-read.csv("C:/Users/julie.wisch/Downloads/DR_mednames_190118.csv")
+
 Meds$hold<-apply(Meds, 1, function(r) any(r %in% c("estradiol", "estrogen", "premarin", "raloxifene", "estrace", "estrogens", 
                                                    "prempro", "estrogel", "fempatch")))
 Meds$Estrogen<-ifelse(Meds$hold == TRUE, 1, 0)
@@ -327,7 +336,7 @@ model3<-lm(TauSig ~ PIB_fSUVR_rsf_TOT_CORTMEAN + Age + Group + EDUC + apoe4, dat
 msum <- anova(model3)
 ## divide all Sums of Squares by the sum() of the Sums of Squares
 msum[["Sum Sq"]]/sum(msum[["Sum Sq"]]) #This gives Cohen's f2
-#Cohen's f2 > 0.02 is small, f2 ≥ 0.15 is medium, and f2 ≥ 0.35 is large
+#Cohen's f2 > 0.02 is small, f2 ??? 0.15 is medium, and f2 ??? 0.35 is large
 
 
 
@@ -345,8 +354,7 @@ grid.arrange(p1, p2, nrow = 2)
 
 ########################################################################################3
 #Now adding in the PACC
-df.psych<-read.csv("C:/Users/julie.wisch/Documents/Aschenbrenner/ances_psych_092618.csv")
-df.clin<-read.csv("C:/Users/julie.wisch/Documents/Aschenbrenner/ances_clinical_011819.csv")
+
 
 
 #srtfree, digsym, memunits (or lmdelay) and MMSE. 
@@ -392,7 +400,7 @@ coeftest(model10, vcov = vcovHC(model10))
 msum <- anova(model10)
 ## divide all Sums of Squares by the sum() of the Sums of Squares
 msum[["Sum Sq"]]/sum(msum[["Sum Sq"]]) #This gives Cohen's f2
-#Cohen's f2 > 0.02 is small, f2 ≥ 0.15 is medium, and f2 ≥ 0.35 is large
+#Cohen's f2 > 0.02 is small, f2 ??? 0.15 is medium, and f2 ??? 0.35 is large
 
 
 
