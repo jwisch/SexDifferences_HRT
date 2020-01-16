@@ -2,8 +2,8 @@
 Sex-Related Differences in Tau Positron Emission Tomography (PET) and the Effects of Hormone Therapy (HT)
 
 
- The primary code for this analysis is stored in SexDiffsAnalysis_v6. 
- Additional functions and data cleaning are in SexDiffFuncs and SexDiffDataCleaning
+ The primary code for this analysis is stored in SexDiffsAnalysis_AlzandDem. 
+ Additional functions and data cleaning are in CommonFuncs, SexDiffFuncs and SexDiffDataCleaning
  
  dabestr, data, flat_violin, main, plot, and plot_helpers were mildly adapted from the R package dabestr. They are no longer necessary, but were used in an earlier version of this manuscript.
  
